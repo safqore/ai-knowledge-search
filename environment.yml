@@ -1,0 +1,20 @@
+name: knowledge-search-env
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.12
+  # - numpy
+  # - matplotlib
+  # - jupyterlab
+  # - graphviz
+  - pip
+  - pip:
+    # - python-dotenv
+    # - micrograd
+    # - graphviz
+
+# Use conda depdencies above where possible. This is because:
+# - Dependency resolution handled more robustly especially for non-python dependencies. Pip focuses on Python packages
+# - Conda packages built specifically for certain environments
+# - Conda installs pre-compiled binaries, which can be faster

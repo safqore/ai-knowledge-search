@@ -1,0 +1,10 @@
+services:
+  knowledge-search:
+    container_name: knowledge-search-container
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/knowledge-search
+    ports:
+      - "8888:8888"
