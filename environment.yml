@@ -4,6 +4,11 @@ channels:
   - defaults
 dependencies:
   - python=3.12
+  - transformers
+  - datasets
+  - evaluate
+  - accelerate
+  - pytorch
   # - numpy
   # - matplotlib
   # - jupyterlab
