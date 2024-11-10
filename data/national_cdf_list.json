@@ -1,0 +1,89 @@
+{
+  "data": [
+    {
+      "title": "Cancer Drug Fund Criteria",
+      "paragraphs": [
+        {
+          "context": "Alectinib monotherapy for adjuvant treatment in adults after complete tumour resection in patients with stage IB-IIIA non-small cell lung cancer whose tumours have an ALK gene rearrangement where the following criteria have been met...",
+          "qas": [
+            {
+              "id": "1",
+              "question": "Can Alectinib be used for non-small cell lung cancer?",
+              "answers": [
+                {
+                  "text": "Alectinib is indicated for adjuvant treatment in adults after complete tumour resection in patients with stage IB-IIIA non-small cell lung cancer with ALK gene rearrangement.",
+                  "answer_start": 0
+                }
+              ],
+              "is_impossible": false
+            }
+          ]
+        },
+        {
+          "context": "Atezolizumab monotherapy for adjuvant treatment after complete tumour resection in adult patients with PD-L1 expression on ≥50% of tumour cells...",
+          "qas": [
+            {
+              "id": "2",
+              "question": "What are the criteria for using Atezolizumab?",
+              "answers": [
+                {
+                  "text": "Atezolizumab is for patients with PD-L1 expression on ≥50% of tumour cells and who have completed adjuvant platinum-based chemotherapy.",
+                  "answer_start": 37
+                }
+              ],
+              "is_impossible": false
+            }
+          ]
+        },
+        {
+          "context": "Avapritinib is indicated for the treatment of aggressive systemic mastocytosis or mast cell leukaemia...",
+          "qas": [
+            {
+              "id": "3",
+              "question": "For which conditions can Avapritinib be used?",
+              "answers": [
+                {
+                  "text": "Aggressive systemic mastocytosis or mast cell leukaemia.",
+                  "answer_start": 34
+                }
+              ],
+              "is_impossible": false
+            }
+          ]
+        },
+        {
+          "context": "Belzutifan is for adult patients with von Hippel-Lindau (VHL) disease requiring systemic therapy for VHL associated renal cell carcinoma...",
+          "qas": [
+            {
+              "id": "4",
+              "question": "Can Belzutifan be used for renal cell carcinoma?",
+              "answers": [
+                {
+                  "text": "Belzutifan is used for VHL associated renal cell carcinoma when localised procedures are unsuitable.",
+                  "answer_start": 34
+                }
+              ],
+              "is_impossible": false
+            }
+          ]
+        },
+        {
+          "context": "Axicabtagene ciloleucel is used for treating relapsed/refractory diffuse large B-cell lymphoma...",
+          "qas": [
+            {
+              "id": "5",
+              "question": "Is Axicabtagene ciloleucel indicated for lymphoma?",
+              "answers": [
+                {
+                  "text": "Axicabtagene ciloleucel is used for relapsed/refractory diffuse large B-cell lymphoma.",
+                  "answer_start": 23
+                }
+              ],
+              "is_impossible": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

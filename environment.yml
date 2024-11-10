@@ -9,18 +9,16 @@ dependencies:
   - evaluate
   - accelerate
   - pytorch
+  - pdfplumber
   # - numpy
   # - matplotlib
   # - jupyterlab
   # - graphviz
   - pip
   - pip:
-    - pymupdf
-    - pandas
     # - python-dotenv
     # - micrograd
     # - graphviz
-
 # Use conda depdencies above where possible. This is because:
 # - Dependency resolution handled more robustly especially for non-python dependencies. Pip focuses on Python packages
 # - Conda packages built specifically for certain environments
