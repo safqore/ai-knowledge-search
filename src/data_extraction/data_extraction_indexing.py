@@ -84,7 +84,7 @@ def upsert_with_retry(index, vectors, chunk_size=100, retries=5, delay=2):
                     raise
 
 # Text processing and embedding for Pinecone storage
-pdf_path = "data/national-cdf-list-v1.331.pdf"  # Updated path to the PDF file
+pdf_path = "data/raw/national-cdf-list-v1.331.pdf"  # Updated path to the PDF file
 document_text = extract_text_from_pdf(pdf_path, start_page=2, end_page=3)
 text_splitter = RecursiveCharacterTextSplitter(chunk_size=500, chunk_overlap=50)
 text_chunks = text_splitter.split_text(document_text)

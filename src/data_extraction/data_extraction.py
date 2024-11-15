@@ -48,9 +48,9 @@ def extract_and_process_table(pdf_path, start_page, end_page):
     return combined_df
 
 # Example usage
-pdf_path = "data/national-cdf-list-v1.331.pdf"
+pdf_path = "data/raw/national-cdf-list-v1.331.pdf"
 df = extract_and_process_table(pdf_path, start_page=2, end_page=248)
 print(df.head())
 
 # Save to CSV
-df.to_csv("data/extracted_cdf_data.csv", index=False)
+df.to_csv("data/processed/extracted_cdf_data.csv", index=False)
