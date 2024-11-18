@@ -4,13 +4,17 @@ import os
 # Add the parent directory to the system path for module imports
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from src.data_extraction.data_extraction import extract_and_process_table
+from src.etl.extract import pdf_to_json
+
+generate_raw_data = 1
 
 """
 Stages of machine learning projects:
 
     1. Collection of the data
-        Data available in /data/raw/
+        - Data available in /data/raw/
+        - Extract raw data from the PDF file and convert it to JSON format.
+        - No cleaning (transformation) will take place in extraction stage
 
     2. Cleaning and transformation
         clean_and_transform_data()
@@ -38,17 +42,20 @@ Stages of machine learning projects:
             We will deploy the model to production and monitor the model performance.
 """
 def main():
-    clean_and_transform_data()
+    if generate_raw_data:
+        pdf_to_json("data/raw/national-cdf-list-v1.331.pdf", 2, 238, "data/raw/national-cdf-list-v1.331.json")
+    
+    # clean_and_transform_data()
     # feature_selection()
     # model_selection()
     # model_training() 
     # performance_assessment()
     # deployment()
 
-def clean_and_transform_data():
-    pdf_path = "data/raw/national-cdf-list-v1.331.pdf"
-    df = extract_and_process_table(pdf_path, start_page=2, end_page=248)
-    print(df.head())
+# def clean_and_transform_data():
+#     pdf_path = "data/raw/national-cdf-list-v1.331.pdf"
+#     df = extract_and_process_table(pdf_path, start_page=2, end_page=248)
+#     print(df.head())
 
 if __name__ == "__main__":
     main()

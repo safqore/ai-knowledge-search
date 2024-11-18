@@ -1,3 +1,5 @@
+# TODO: Move to correct location in the project structure or remove if not needed
+
 import os
 import random
 from pinecone import Pinecone
