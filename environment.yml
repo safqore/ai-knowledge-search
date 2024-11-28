@@ -4,15 +4,14 @@ channels:
   - defaults
 dependencies:
   - python=3.12
-  # - numpy
-  # - matplotlib
-  # - jupyterlab
-  # - graphviz
+  - python-dotenv
+  - langchain-huggingface
+  - langchain-text-splitters
+  - langchain-community
+  - transformers
   - pip
   - pip:
-    # - python-dotenv
-    # - micrograd
-    # - graphviz
+    - pypdf
 
 # Use conda depdencies above where possible. This is because:
 # - Dependency resolution handled more robustly especially for non-python dependencies. Pip focuses on Python packages
