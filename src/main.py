@@ -1,61 +1,74 @@
-import sys
 import os
+from qdrant_client import QdrantClient
+from qdrant_client.http.models import Filter, FieldCondition, MatchValue
+from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
+from langchain_core.messages import HumanMessage, SystemMessage
+from langchain_core.prompts import PromptTemplate
+from langchain_core.runnables import RunnableSequence
 
-# Add the parent directory to the system path for module imports
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+# Load environment variables from .env file
+from dotenv import load_dotenv
+load_dotenv()
 
-from src.etl.extract import pdf_to_json
+LANGCHAIN_TRACING_V2="true"
+LANGCHAIN_ENDPOINT="https://api.smith.langchain.com"
+LANGCHAIN_API_KEY=os.getenv('LANGSMITH_API_KEY')
+LANGCHAIN_PROJECT="ai-knowledge-search"
 
-generate_raw_data = 1
+os.environ["LANGSMITH_API_KEY"] = os.getenv('LANGSMITH_API_KEY')
+os.environ["LANGSMITH_TRACING"] = "true"
 
-"""
-Stages of machine learning projects:
+# Initialize Qdrant client
+qdrant_client = QdrantClient(host=os.getenv("QDRANT_HOST", "localhost"), port=int(os.getenv("QDRANT_PORT", 6333)))
 
-    1. Collection of the data
-        - Data available in /data/raw/
-        - Extract raw data from the PDF file and convert it to JSON format.
-        - No cleaning (transformation) will take place in extraction stage
+# Search for a keyword or phrase
+query = "What is criteria for use for Alectinib?"
+query_vector = embeddings.embed_query(query)
 
-    2. Cleaning and transformation
-        clean_and_transform_data()
+results = qdrant_client.search(
+    collection_name="cancer_drugs_fund_list",
+    query_vector=query_vector,
+    limit=10,
+    with_payload=True,
+)
 
-    3. Feature selection
-        TBD: 
-            We will select a subset of input features from the data for a model to reduce noise. 
-            We eliminate some of the available features in this process to get the best results from the model using minimum data and to ensure model explainability and simplicity.
+# Print the search results
+for result in results:
+    print(result.payload["text"])
 
-    4. Model selection
-        TBD: 
-            We will select the best model for the data based on the problem we are trying to solve. 
-            We will use the model to train on the data and make predictions.
+# Set up HuggingFace API token
+os.environ["HUGGINGFACEHUB_API_TOKEN"] = os.getenv('HUGGING_FACE_HUB_TOKEN')
 
-    5. Model training
-        TBD: 
-            We will train the model on the data.
+# Initialize HuggingFace endpoint
+obj_llm = HuggingFaceEndpoint(
+    repo_id="microsoft/Phi-3-mini-4k-instruct",
+    task="text-generation",
+    max_new_tokens=512,
+    do_sample=False,
+    repetition_penalty=1.03,
+)
 
-    6. Performance assessment
-        TBD: 
-            We will evaluate the model performance on the test data and validate the model performance.
+chat_model = ChatHuggingFace(llm=obj_llm)
 
-    7. Deployment of the model
-        TBD:
-            We will deploy the model to production and monitor the model performance.
-"""
-def main():
-    if generate_raw_data:
-        pdf_to_json("data/raw/national-cdf-list-v1.331.pdf", 2, 238, "data/raw/national-cdf-list-v1.331.json")
-    
-    # clean_and_transform_data()
-    # feature_selection()
-    # model_selection()
-    # model_training() 
-    # performance_assessment()
-    # deployment()
+messages = [
+    SystemMessage(content="You're a helpful assistant"),
+    HumanMessage(
+        content="What happens when an unstoppable force meets an immovable object?"
+    ),
+]
 
-# def clean_and_transform_data():
-#     pdf_path = "data/raw/national-cdf-list-v1.331.pdf"
-#     df = extract_and_process_table(pdf_path, start_page=2, end_page=248)
-#     print(df.head())
+ai_msg = chat_model.invoke(messages)
 
-if __name__ == "__main__":
-    main()
+print(ai_msg.content)
+
+# # Summarize the text chunks
+# question_prompt = PromptTemplate.from_template(
+#     'What is criteria for use for {drug}?'
+# )
+# question_chain = question_prompt | obj_llm
+
+# summaries = [question_chain.run(text=chunk) for chunk in lst_chunks]
+
+# # Print the summaries
+# for summary in summaries:
+#     print(summary)

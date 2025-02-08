@@ -1,4 +1,2 @@
 .ipynb_checkpoints/
-.DS_Store
-.idea/
-src/etl/__pycache__/
+.env
